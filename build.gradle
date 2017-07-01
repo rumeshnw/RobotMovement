@@ -1,0 +1,97 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+
+    }
+}
+
+group 'au.com.robotMovement'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'au.com.robotMovement.ApplicationBootstrap'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'org.springframework:spring-context:4.3.9.RELEASE'
+    compile 'log4j:log4j:1.2.17'
+
+    runtime 'hsqldb:hsqldb:1.8.0.7'
+
+    testCompile 'org.springframework:spring-test:4.3.8.RELEASE'
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.7'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-4'
+}
+
+jar {
+    baseName = 'RobotMovement'
+    version = version
+}
+
+sourceSets {
+    integrationTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integrationtest/groovy')
+        }
+        resources.srcDir file('src/integrationtest/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    outputs.upToDateWhen {false}
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/integrationTest.exec")
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+run{
+    standardInput = System.in
+}
+
+task runJar(type: JavaExec) {
+    classpath = files("build/libs/${jar.baseName}-${jar.version}.jar")
+    classpath += sourceSets.main.runtimeClasspath
+    main = mainClassName
+    standardInput = System.in
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    executionData test, integrationTest
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
+
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: 'au/com/robotMovement/ui/**')
+        })
+    }
+}
