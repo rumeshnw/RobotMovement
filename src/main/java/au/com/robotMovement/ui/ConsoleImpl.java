@@ -1,7 +1,7 @@
 package au.com.robotMovement.ui;
 
 import au.com.robotMovement.enums.Action;
-import au.com.robotMovement.enums.Facing;
+import au.com.robotMovement.enums.Direction;
 import au.com.robotMovement.service.RobotMovementService;
 
 /**
@@ -21,11 +21,19 @@ public class ConsoleImpl implements Console {
         showBanner();
 
         //TODO: Remove after testing
-        robotMovementService.positionRobot(1, 2, Facing.EAST);
+        robotMovementService.positionRobot(1, 2, Direction.EAST);
         robotMovementService.performAction(Action.MOVE);
         robotMovementService.performAction(Action.MOVE);
         robotMovementService.performAction(Action.LEFT);
         robotMovementService.performAction(Action.MOVE);
+        robotMovementService.report().ifPresent(System.out::println);
+
+        robotMovementService.positionRobot(0, 0, Direction.NORTH);
+        robotMovementService.performAction(Action.MOVE);
+        robotMovementService.report().ifPresent(System.out::println);
+
+        robotMovementService.positionRobot(0, 0, Direction.NORTH);
+        robotMovementService.performAction(Action.LEFT);
         robotMovementService.report().ifPresent(System.out::println);
 
 //        withScanner(scanner -> {

@@ -30,8 +30,8 @@ public interface RobotAction {
         return robot -> {
             if(continueAction(robot)){
                 Coordinates coordinates = robot.getCoordinates();
-                int newXCoordinate = coordinates.getXCoordinate() + coordinates.getFacing().getNextMoveXCoordinateChange();
-                int newYCoordinate = coordinates.getYCoordinate() + coordinates.getFacing().getNextMoveYCoordinateChange();
+                int newXCoordinate = coordinates.getXCoordinate() + coordinates.getDirection().getNextMoveXCoordinateChange();
+                int newYCoordinate = coordinates.getYCoordinate() + coordinates.getDirection().getNextMoveYCoordinateChange();
 
                 if(robot.getTable().isValidPosition(newXCoordinate, newYCoordinate)){
                     coordinates.setXCoordinate(newXCoordinate);
@@ -47,7 +47,7 @@ public interface RobotAction {
     static RobotAction turnLeft(){
         return robot -> {
             if(continueAction(robot)){
-                robot.getCoordinates().setFacing(robot.getCoordinates().getFacing().getTurnLeft());
+                robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionLeft());
             }
         };
     }
@@ -58,7 +58,7 @@ public interface RobotAction {
     static RobotAction turnRight(){
         return robot -> {
             if(continueAction(robot)){
-                robot.getCoordinates().setFacing(robot.getCoordinates().getFacing().getTurnRight());
+                robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionRight());
             }
         };
     }

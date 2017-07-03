@@ -5,7 +5,7 @@ package au.com.robotMovement.enums;
  *
  * @author rnadeera
  */
-public enum Facing {
+public enum Direction {
     NORTH(0, 1, "WEST", "EAST"),
     SOUTH(0, -1, "EAST", "WEST"),
     EAST(1, 0, "NORTH", "SOUTH"),
@@ -13,14 +13,14 @@ public enum Facing {
 
     private int nextMoveXCoordinateChange;
     private int nextMoveYCoordinateChange;
-    private String turnLeft;
-    private String turnRight;
+    private String directionLeft;
+    private String directionRight;
 
-    Facing(int nextMoveXCoordinateChange, int nextMoveYCoordinateChange, String turnLeft, String turnRight) {
+    Direction(int nextMoveXCoordinateChange, int nextMoveYCoordinateChange, String directionLeft, String directionRight) {
         this.nextMoveXCoordinateChange  = nextMoveXCoordinateChange;
         this.nextMoveYCoordinateChange  = nextMoveYCoordinateChange;
-        this.turnLeft                   = turnLeft;
-        this.turnRight                  = turnRight;
+        this.directionLeft              = directionLeft;
+        this.directionRight             = directionRight;
     }
 
     public int getNextMoveXCoordinateChange() {
@@ -31,11 +31,11 @@ public enum Facing {
         return nextMoveYCoordinateChange;
     }
 
-    public Facing getTurnLeft() {
-        return Facing.valueOf(turnLeft);
+    public Direction getDirectionLeft() {
+        return Direction.valueOf(directionLeft);
     }
 
-    public Facing getTurnRight() {
-        return Facing.valueOf(turnRight);
+    public Direction getDirectionRight() {
+        return Direction.valueOf(directionRight);
     }
 }

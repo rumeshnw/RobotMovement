@@ -4,7 +4,7 @@ import au.com.robotMovement.domain.Coordinates;
 import au.com.robotMovement.domain.Robot;
 import au.com.robotMovement.domain.Table;
 import au.com.robotMovement.enums.Action;
-import au.com.robotMovement.enums.Facing;
+import au.com.robotMovement.enums.Direction;
 import au.com.robotMovement.service.process.RobotAction;
 
 import java.util.Optional;
@@ -22,14 +22,14 @@ public class RobotMovementServiceImpl implements RobotMovementService {
     }
 
     @Override
-    public Robot positionRobot(int xCoordinate, int yCoordinate, Facing facing) {
+    public Robot positionRobot(int xCoordinate, int yCoordinate, Direction direction) {
 
         Robot robot = table.getRobotInstance();
         if(table.isValidPosition(xCoordinate, yCoordinate)){
             Coordinates coordinates = robot.getCoordinatesInstance();
             coordinates.setXCoordinate(xCoordinate);
             coordinates.setYCoordinate(yCoordinate);
-            coordinates.setFacing(facing);
+            coordinates.setDirection(direction);
         }
 
         return robot;

@@ -29,7 +29,7 @@ public class Robot {
     }
 
     public boolean isRobotPlacedOnTable(){
-        return coordinates != null && coordinates.getFacing() != null;
+        return coordinates != null && coordinates.getDirection() != null;
     }
 
     /**

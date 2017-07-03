@@ -1,6 +1,6 @@
 package au.com.robotMovement.domain;
 
-import au.com.robotMovement.enums.Facing;
+import au.com.robotMovement.enums.Direction;
 
 /**
  * Hold Coordinates information
@@ -10,12 +10,12 @@ public class Coordinates {
 
     private int xCoordinate;
     private int yCoordinate;
-    private Facing facing;
+    private Direction direction;
 
-    public Coordinates(int xCoordinate, int yCoordinate, Facing facing) {
+    public Coordinates(int xCoordinate, int yCoordinate, Direction direction) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
-        this.facing = facing;
+        this.direction = direction;
     }
 
     public Coordinates() {
@@ -37,16 +37,16 @@ public class Coordinates {
         this.yCoordinate = yCoordinate;
     }
 
-    public Facing getFacing() {
-        return facing;
+    public Direction getDirection() {
+        return direction;
     }
 
-    public void setFacing(Facing facing) {
-        this.facing = facing;
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     @Override
     public String toString() {
-        return xCoordinate + ", " + yCoordinate + ", " + facing.toString();
+        return xCoordinate + ", " + yCoordinate + ", " + direction.toString();
     }
 }
