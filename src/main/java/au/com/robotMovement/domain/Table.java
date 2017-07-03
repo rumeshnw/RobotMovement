@@ -62,11 +62,11 @@ public class Table {
     /**
      * Check given x and y coordinates are valid for the squareTable
      *
-     * @param cordinatesX new x-coordinate
-     * @param cordinatesY new y-coordinate
+     * @param coordinatesX new x-coordinate
+     * @param coordinatesY new y-coordinate
      * @return boolean value stating validity
      */
-    public boolean isValidPosition(int cordinatesX, int cordinatesY){
-        return cordinatesX >= 0 && cordinatesX <= rows && cordinatesY >= 0 && cordinatesY <= columns;
+    public boolean isValidPosition(int coordinatesX, int coordinatesY){
+        return coordinatesX >= 0 && coordinatesX < rows && coordinatesY >= 0 && coordinatesY < columns;
     }
 }

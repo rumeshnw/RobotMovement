@@ -24,9 +24,8 @@ public class RobotMovementServiceImpl implements RobotMovementService {
     @Override
     public void positionRobot(int xCoordinate, int yCoordinate, Direction direction) {
 
-        Robot robot = table.getRobotInstance();
         if(table.isValidPosition(xCoordinate, yCoordinate)){
-            Coordinates coordinates = robot.getCoordinatesInstance();
+            Coordinates coordinates = table.getRobotInstance().getCoordinatesInstance();
             coordinates.setXCoordinate(xCoordinate);
             coordinates.setYCoordinate(yCoordinate);
             coordinates.setDirection(direction);
