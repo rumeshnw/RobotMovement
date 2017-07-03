@@ -1,6 +1,6 @@
 package au.com.robotMovement.service;
 
-import au.com.robotMovement.enums.Action;
+import au.com.robotMovement.enums.Command;
 import au.com.robotMovement.enums.Direction;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ public interface RobotMovementService {
 
     void positionRobot(int xCoordinate, int yCoordinate, Direction direction);
 
-    void performAction(Action action);
+    void performAction(Command command);
 
     Optional<String> report();
 }

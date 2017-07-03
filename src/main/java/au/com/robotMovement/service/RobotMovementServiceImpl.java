@@ -1,9 +1,8 @@
 package au.com.robotMovement.service;
 
 import au.com.robotMovement.domain.Coordinates;
-import au.com.robotMovement.domain.Robot;
 import au.com.robotMovement.domain.Table;
-import au.com.robotMovement.enums.Action;
+import au.com.robotMovement.enums.Command;
 import au.com.robotMovement.enums.Direction;
 import au.com.robotMovement.service.process.RobotAction;
 
@@ -33,9 +32,9 @@ public class RobotMovementServiceImpl implements RobotMovementService {
     }
 
     @Override
-    public void performAction(Action action) {
+    public void performAction(Command command) {
         if(RobotAction.continueAction(table.getRobot())){
-            switch (action){
+            switch (command){
                 case LEFT:
                     RobotAction.turnLeft().performAction(table.getRobot());
                     break;

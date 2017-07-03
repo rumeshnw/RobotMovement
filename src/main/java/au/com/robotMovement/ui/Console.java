@@ -24,6 +24,6 @@ public interface Console {
     }
 
     default String trimUserInput(Scanner scanner){
-        return StringUtils.trimToNull(scanner.nextLine());
+        return StringUtils.trimToEmpty(scanner.nextLine());
     }
 }

@@ -1,5 +1,8 @@
 package au.com.robotMovement.enums;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * enum holds direction {@link au.com.robotMovement.domain.Robot} currently facing
  *
@@ -22,6 +25,11 @@ public enum Direction {
         this.nextMoveYCoordinateChange  = nextMoveYCoordinateChange;
         this.directionLeft              = directionLeft;
         this.directionRight             = directionRight;
+    }
+
+    public static String getAllDirectionAsString(){
+        return Stream.of(Direction.values()).map(direction -> direction.toString())
+                                            .collect(Collectors.joining("|"));
     }
 
     public int getNextMoveXCoordinateChange() {
