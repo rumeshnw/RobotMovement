@@ -6,7 +6,6 @@ import au.com.robotMovement.domain.Table;
 import au.com.robotMovement.enums.Action;
 import au.com.robotMovement.enums.Facing;
 import au.com.robotMovement.service.process.RobotAction;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
@@ -16,8 +15,11 @@ import java.util.Optional;
  */
 public class RobotMovementServiceImpl implements RobotMovementService {
 
-    @Autowired
     private Table table;
+
+    public RobotMovementServiceImpl(Table table){
+        this.table = table;
+    }
 
     @Override
     public Robot positionRobot(int xCoordinate, int yCoordinate, Facing facing) {

@@ -28,7 +28,6 @@ repositories {
 
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.5'
-    compile 'org.springframework:spring-context:4.3.9.RELEASE'
     compile 'log4j:log4j:1.2.17'
 
     runtime 'hsqldb:hsqldb:1.8.0.7'

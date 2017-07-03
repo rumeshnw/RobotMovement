@@ -8,6 +8,7 @@ import au.com.robotMovement.domain.Robot;
  *
  * @author rnadeera
  */
+@FunctionalInterface
 public interface RobotAction {
 
     void performAction(Robot robot);

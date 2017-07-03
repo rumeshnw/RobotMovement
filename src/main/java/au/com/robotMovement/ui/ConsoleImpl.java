@@ -3,7 +3,6 @@ package au.com.robotMovement.ui;
 import au.com.robotMovement.enums.Action;
 import au.com.robotMovement.enums.Facing;
 import au.com.robotMovement.service.RobotMovementService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author rnadeera
@@ -11,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ConsoleImpl implements Console {
 
-    @Autowired
     RobotMovementService robotMovementService;
+
+    public ConsoleImpl(RobotMovementService robotMovementService){
+        this.robotMovementService = robotMovementService;
+    }
 
     @Override
     public void startConsole() {
