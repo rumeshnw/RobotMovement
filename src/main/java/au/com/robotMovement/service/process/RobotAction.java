@@ -2,6 +2,7 @@ package au.com.robotMovement.service.process;
 
 import au.com.robotMovement.domain.Coordinates;
 import au.com.robotMovement.domain.Robot;
+import au.com.robotMovement.domain.Table;
 
 /**
  *  Interface for Robot Actions
@@ -25,18 +26,18 @@ public interface RobotAction {
 
     /**
      * @return Concrete {@link RobotAction} to handle {@link au.com.robotMovement.domain.Robot} to move
+     * @param table
      */
-    static RobotAction moveRobot(){
+    static RobotAction moveRobot(Table table){
         return robot -> {
-            if(continueAction(robot)){
-                Coordinates coordinates = robot.getCoordinates();
-                int newXCoordinate = coordinates.getXCoordinate() + coordinates.getDirection().getNextMoveXCoordinateChange();
-                int newYCoordinate = coordinates.getYCoordinate() + coordinates.getDirection().getNextMoveYCoordinateChange();
+            Coordinates currentCoordinates = robot.getCoordinates();
 
-                if(robot.getTable().isValidPosition(newXCoordinate, newYCoordinate)){
-                    coordinates.setXCoordinate(newXCoordinate);
-                    coordinates.setYCoordinate(newYCoordinate);
-                }
+            int newXCoordinate = currentCoordinates.getXCoordinateOnNextMove();
+            int newYCoordinate = currentCoordinates.getYCoordinateOnNextMove();
+
+            if(table.isValidPosition(newXCoordinate, newYCoordinate)){
+                currentCoordinates.setXCoordinate(newXCoordinate);
+                currentCoordinates.setYCoordinate(newYCoordinate);
             }
         };
     }
@@ -45,21 +46,13 @@ public interface RobotAction {
      * @return Concrete {@link RobotAction} to handle turn {@link au.com.robotMovement.domain.Robot} to left
      */
     static RobotAction turnLeft(){
-        return robot -> {
-            if(continueAction(robot)){
-                robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionLeft());
-            }
-        };
+        return robot -> robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionLeft());
     }
 
     /**
      * @return Concrete {@link RobotAction} to handle turn {@link au.com.robotMovement.domain.Robot} to right
      */
     static RobotAction turnRight(){
-        return robot -> {
-            if(continueAction(robot)){
-                robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionRight());
-            }
-        };
+        return robot -> robot.getCoordinates().setDirection(robot.getCoordinates().getDirection().getDirectionRight());
     }
 }

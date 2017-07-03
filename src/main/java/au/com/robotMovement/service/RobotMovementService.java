@@ -1,6 +1,5 @@
 package au.com.robotMovement.service;
 
-import au.com.robotMovement.domain.Robot;
 import au.com.robotMovement.enums.Action;
 import au.com.robotMovement.enums.Direction;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
  */
 public interface RobotMovementService {
 
-    Robot positionRobot(int xCoordinate, int yCoordinate, Direction direction);
+    void positionRobot(int xCoordinate, int yCoordinate, Direction direction);
 
     void performAction(Action action);
 

@@ -45,6 +45,14 @@ public class Coordinates {
         this.direction = direction;
     }
 
+    public int getXCoordinateOnNextMove(){
+        return xCoordinate + direction.getNextMoveXCoordinateChange();
+    }
+
+    public int getYCoordinateOnNextMove(){
+        return yCoordinate + direction.getNextMoveYCoordinateChange();
+    }
+
     @Override
     public String toString() {
         return xCoordinate + ", " + yCoordinate + ", " + direction.toString();

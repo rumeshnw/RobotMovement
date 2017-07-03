@@ -17,15 +17,16 @@ public class ResourceFactory {
 
     }
 
-    public static Table table(){
-        return Table.buildSquareTableTop(5);
+    public static Console console(){
+        return new ConsoleImpl(robotMovementService());
     }
 
     public static RobotMovementService robotMovementService(){
-        return new RobotMovementServiceImpl(table());
+        return new RobotMovementServiceImpl(squareTable());
     }
 
-    public static Console console(){
-        return new ConsoleImpl(robotMovementService());
+
+    public static Table squareTable(){
+        return Table.buildSquareTable(5);
     }
 }

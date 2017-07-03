@@ -6,11 +6,6 @@ package au.com.robotMovement.domain;
 public class Robot {
 
     private Coordinates coordinates;
-    private Table table;
-
-    public Robot(Table table) {
-        this.table = table;
-    }
 
     public Coordinates getCoordinates() {
         return coordinates;
@@ -18,14 +13,6 @@ public class Robot {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
     }
 
     public boolean isRobotPlacedOnTable(){

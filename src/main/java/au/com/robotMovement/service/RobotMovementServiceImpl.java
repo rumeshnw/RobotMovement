@@ -22,7 +22,7 @@ public class RobotMovementServiceImpl implements RobotMovementService {
     }
 
     @Override
-    public Robot positionRobot(int xCoordinate, int yCoordinate, Direction direction) {
+    public void positionRobot(int xCoordinate, int yCoordinate, Direction direction) {
 
         Robot robot = table.getRobotInstance();
         if(table.isValidPosition(xCoordinate, yCoordinate)){
@@ -31,22 +31,22 @@ public class RobotMovementServiceImpl implements RobotMovementService {
             coordinates.setYCoordinate(yCoordinate);
             coordinates.setDirection(direction);
         }
-
-        return robot;
     }
 
     @Override
     public void performAction(Action action) {
-        switch (action){
-            case LEFT:
-                RobotAction.turnLeft().performAction(table.getRobot());
-                break;
-            case RIGHT:
-                RobotAction.turnRight().performAction(table.getRobot());
-                break;
-            case MOVE:
-                RobotAction.moveRobot().performAction(table.getRobot());
-                break;
+        if(RobotAction.continueAction(table.getRobot())){
+            switch (action){
+                case LEFT:
+                    RobotAction.turnLeft().performAction(table.getRobot());
+                    break;
+                case RIGHT:
+                    RobotAction.turnRight().performAction(table.getRobot());
+                    break;
+                case MOVE:
+                    RobotAction.moveRobot(table).performAction(table.getRobot());
+                    break;
+            }
         }
     }
 

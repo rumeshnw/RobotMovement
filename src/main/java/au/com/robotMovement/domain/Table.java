@@ -13,7 +13,7 @@ public class Table {
     private Table(){
     }
 
-    public static Table buildSquareTableTop(int units){
+    public static Table buildSquareTable(int units){
         Table squareTable = new Table();
         squareTable.setRows(units);
         squareTable.setColumns(units);
@@ -45,7 +45,7 @@ public class Table {
     }
 
     /**
-     * This method create new {@link Robot} instance if no {@link Robot} is exists is the table,
+     * This method create new {@link Robot} instance if no {@link Robot} is exists is the squareTable,
      * else return already assigned {@link Robot}
      *
      * @return {@link Robot} instance
@@ -55,12 +55,12 @@ public class Table {
             return robot;
         }
 
-        robot = new Robot(this);
+        robot = new Robot();
         return robot;
     }
 
     /**
-     * Check given x and y coordinates are valid for the table
+     * Check given x and y coordinates are valid for the squareTable
      *
      * @param cordinatesX new x-coordinate
      * @param cordinatesY new y-coordinate

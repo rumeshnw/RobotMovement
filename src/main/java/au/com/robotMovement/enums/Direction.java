@@ -13,6 +13,7 @@ public enum Direction {
 
     private int nextMoveXCoordinateChange;
     private int nextMoveYCoordinateChange;
+
     private String directionLeft;
     private String directionRight;
 
