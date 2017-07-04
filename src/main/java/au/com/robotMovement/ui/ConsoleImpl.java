@@ -29,7 +29,7 @@ public class ConsoleImpl implements Console {
     @Override
     public void startConsole() {
         showBanner();
-        System.out.println("Enter any of the following command to begin robot movement\n");
+        System.out.println("Enter any of the following commands to begin robot movement\n");
         showAllCommands();
 
         withScanner(scanner -> {
@@ -65,6 +65,28 @@ public class ConsoleImpl implements Console {
         });
     }
 
+    Command getCommand(String userInput){
+        try {
+            return Command.valueOf(userInput.split("\\s")[0]);
+        } catch (Exception e){
+            throw new IllegalArgumentException("Invalid command. Please try again with a valid command.");
+        }
+    }
+
+    void placeRobot(String userInput){
+        if(!PLACE_PATTERN.matcher(userInput).matches()){
+            throw new IllegalArgumentException("Format of the PLACE command is invalid. Valid command should be PLACE X,Y,F where X is X coordinate, Y is Y coordinate and F is Facing direction(NORTH,SOUTH,EAST,WEST)");
+        }
+
+        String[] directionInputs = getPlacementCoordinates(userInput);
+
+        robotMovementService.positionRobot(Integer.parseInt(directionInputs[0]), Integer.parseInt(directionInputs[1]), Direction.valueOf(directionInputs[2]));
+    }
+
+    String[] getPlacementCoordinates(String userInput){
+        return (userInput.split("\\s")[1]).split(",");
+    }
+
     private void showBanner(){
         System.out.println("##################################################################");
         System.out.println("################## Welcome to Robot Movement #####################");
@@ -79,27 +101,4 @@ public class ConsoleImpl implements Console {
         System.out.println("REPORT");
         System.out.println("EXIT");
     }
-
-    private Command getCommand(String userInput){
-        try {
-            return Command.valueOf(userInput.split("\\s")[0]);
-        } catch (Exception e){
-            throw new IllegalArgumentException("Invalid command. Please try again with a valid command.");
-        }
-    }
-
-    private void placeRobot(String userInput){
-        if(!PLACE_PATTERN.matcher(userInput).matches()){
-            throw new IllegalArgumentException("Format of the PLACE command is invalid. Valid command should be PLACE X,Y,F where X is X coordinate, Y is Y coordinate and F is Facing direction(NORTH,SOUTH,EAST,WEST)");
-        }
-
-        String[] directionInputs = getPlacementCoordinates(userInput);
-
-        robotMovementService.positionRobot(Integer.parseInt(directionInputs[0]), Integer.parseInt(directionInputs[1]), Direction.valueOf(directionInputs[2]));
-    }
-
-    private String[] getPlacementCoordinates(String userInput){
-        return (userInput.split("\\s")[1]).split(",");
-    }
-
 }
